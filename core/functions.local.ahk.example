@@ -1,0 +1,46 @@
+#Requires AutoHotkey v2.0
+
+; =============================================================================
+;  Site-specific call: targets - the programs, addresses and paths of ONE
+;  workplace or one machine. Copy this file to functions.local.ahk (which git
+;  ignores) and fill in your own. Sostenuto includes it if it exists, after
+;  core\functions.ahk, so everything there (Launch, NewestApp, runApp,
+;  RunAhk, class Cfg) can be used here. The GUI's Insert… menu reads this
+;  file the same way: parameterless functions above a "Shared machinery"
+;  heading, if there is one. Name them in the ini as call:<name>.
+; =============================================================================
+
+class Site {
+    ; Programs
+    static Journal := "C:\Program Files\Journal\Journal.exe"
+
+    ; A program in a version-numbered folder (Viewer-2.0.1, …) is looked up
+    ; at run time with NewestApp, so the path survives updates.
+    static ViewerDir  := "C:\Program Files\Vendor"
+    static ViewerGlob := "Viewer-*"
+    static ViewerExe  := "Viewer.exe"
+
+    ; Web addresses
+    static Intranet := "https://intranet.example.org/"
+
+    ; Scripts
+    static Helper := "scripts\Helper.ahk"   ; under OneDrive
+}
+
+; Activate the program if it is already open, otherwise start it.
+LaunchJournal() {
+    if WinExist("ahk_exe Journal") {
+        WinActivate("ahk_exe Journal")
+        return
+    }
+    Launch(Site.Journal)
+}
+
+LaunchViewer()   => Launch(NewestApp(Site.ViewerDir, Site.ViewerGlob, Site.ViewerExe))
+LaunchIntranet() => Launch(Cfg.Edge " " Site.Intranet)
+LaunchHelper()   => RunAhk(OneDrive(Site.Helper))
+
+; ── Shared machinery ────────────────────────────────────────────────────────
+; Builds a path under the user's OneDrive - works whatever the profile is
+; named (EnvGet USERPROFILE instead of hardcoding).
+OneDrive(rel) => EnvGet("USERPROFILE") "\OneDrive\" rel

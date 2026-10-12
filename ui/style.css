@@ -1,0 +1,249 @@
+:root {
+  --bg:        #1e1e1e;
+  --bg2:       #252526;
+  --bg3:       #2d2d30;
+  --border:    #3c3c3c;
+  --text:      #d4d4d4;
+  --text-dim:  #9a9a9a;
+  --accent:    #c9a34a;   /* segno gold, matching the icon */
+  --accent2:   #e0b95c;
+  --green:     #2ea043;
+  --red:       #d63232;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font: 13px "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── topbar ──────────────────────────────────────────────────────────── */
+#topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 12px;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+}
+#logo { font-size: 20px; color: var(--accent); line-height: 1; }
+#appname { font-weight: 600; font-size: 14px; margin-right: 10px; }
+#appname .sub { font-weight: 400; color: var(--text-dim); }
+#langSel { padding: 3px 6px; }
+.spacer { flex: 1; }
+
+button {
+  font: inherit;
+  color: var(--text);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+button:hover { background: #37373d; }
+button:disabled { opacity: .45; cursor: default; }
+button.primary { background: var(--accent); border-color: var(--accent2); color: #1e1e1e; font-weight: 600; }
+button.primary:hover { background: var(--accent2); }
+button.small { padding: 2px 8px; font-size: 12px; }
+th.selcol, td.selcol { width: 28px; text-align: center; }
+.hkrow { display: flex; align-items: center; gap: 12px; margin: 4px 0; }
+.hkcombo { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.hkkey { width: 90px; }
+.hklbl { color: var(--text-dim); }
+button.danger-armed { background: var(--red); border-color: #f05050; color: #fff; }
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--text-dim);
+  user-select: none;
+  white-space: nowrap;
+}
+.toggle input { accent-color: var(--accent); cursor: pointer; }
+.toggle:hover { color: var(--text); }
+
+/* ── tabs ────────────────────────────────────────────────────────────── */
+#tabs {
+  display: flex;
+  gap: 2px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 8px;
+}
+#tabs .tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  color: var(--text-dim);
+  padding: 8px 14px;
+}
+#tabs .tab:hover { color: var(--text); }
+#tabs .tab.active { color: var(--accent2); border-bottom-color: var(--accent); }
+
+/* ── panes ───────────────────────────────────────────────────────────── */
+#main { flex: 1; min-height: 0; display: flex; }
+.tabpane { display: none; flex: 1; min-width: 0; flex-direction: column; }
+.tabpane.active { display: flex; }
+.pane-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+}
+.pane-head label { color: var(--text-dim); }
+.hint { color: var(--text-dim); font-style: italic; }
+select, input[type=text], textarea {
+  font: inherit;
+  color: var(--text);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+select:focus, input[type=text]:focus, textarea:focus { outline: 1px solid var(--accent); }
+
+.tablewrap { flex: 1; overflow: auto; min-height: 0; }
+table { width: 100%; border-collapse: collapse; }
+th {
+  position: sticky;
+  top: 0;
+  background: var(--bg3);
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--text-dim);
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  z-index: 1;
+}
+td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #2a2a2a;
+  vertical-align: middle;
+}
+tbody tr:hover { background: var(--bg3); }
+td.num { text-align: right; font-variant-numeric: tabular-nums; color: var(--text-dim); white-space: nowrap; }
+td.actions { text-align: right; white-space: nowrap; }
+td.actions button { margin-left: 6px; }
+.ellip { max-width: 420px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.empty-row td { color: var(--text-dim); font-style: italic; }
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  border-radius: 3px;
+  padding: 1px 6px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.badge.rule { color: var(--accent2); border-color: var(--accent); }
+.ok { color: var(--green); }
+.dim { color: var(--text-dim); }
+
+/* ── rules ───────────────────────────────────────────────────────────── */
+#tab-rules, #tab-settings { overflow-y: auto; display: none; }
+#tab-rules.active, #tab-settings.active { display: block; }
+#tab-rules .inner, #tab-settings .inner { padding: 12px 16px; max-width: 860px; }
+#tab-rules h2, #tab-settings h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--text-dim);
+  margin: 18px 0 6px;
+}
+#tab-rules h2:first-child, #tab-settings h2:first-child { margin-top: 0; }
+#tab-rules p.help, #tab-settings p.help { color: var(--text-dim); margin: 4px 0 10px; }
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0;
+  cursor: pointer;
+  user-select: none;
+}
+.radio input { accent-color: var(--accent); cursor: pointer; }
+#rulesTable input[type=text] { width: 100%; }
+#rulesTable td.alias { width: 180px; }
+#rulesTable td.rx { width: 60px; text-align: center; }
+#rulesTable td.del { width: 40px; text-align: center; }
+.ignore-grid { display: flex; gap: 16px; }
+.ignore-grid > div { flex: 1; }
+.ignore-grid textarea { width: 100%; height: 110px; resize: vertical; font-family: Consolas, monospace; font-size: 12px; }
+#rulesFooter { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+#rulesDirty { color: var(--accent2); font-style: italic; }
+
+/* ── statusbar ───────────────────────────────────────────────────────── */
+#statusbar {
+  padding: 4px 12px;
+  background: var(--bg3);
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 12px;
+  display: flex;
+  gap: 14px;
+}
+#statusbar .warn { color: #e0b95c; }
+
+/* ── Sostenuto additions ───────────────────────────────────────────── */
+.inner { padding: 18px 26px 26px; max-width: 900px; flex: 1; min-height: 0; overflow-y: auto; }
+.inner > h2:first-child { margin-top: 4px; }
+h3 { font-size: 13px; font-weight: 600; margin: 18px 0 6px; color: var(--text-dim); }
+.modrow { display: flex; align-items: center; gap: 14px; margin: 8px 0 2px; }
+.modrow label { display: flex; align-items: center; gap: 8px; }
+.modrow select { min-width: 110px; }
+.hint { color: var(--text-dim); font-size: 12px; }
+.warn { border-left: 3px solid var(--warn, #d19a2f); padding-left: 10px; color: var(--text-dim); }
+.dirty { margin-left: 10px; color: var(--warn, #d19a2f); font-size: 12px; }
+input.wide { width: 100%; box-sizing: border-box; }
+td input.k-key { width: 120px; }
+.layerbox { border: 1px solid var(--line, #333); border-radius: 6px; padding: 10px 12px; margin: 10px 0; }
+.layerhead { display: flex; align-items: center; gap: 10px; }
+.layerdesc { color: var(--text-dim); font-size: 12px; margin: 4px 0 8px; }
+.bindlist code { display: inline-block; margin: 2px 4px 2px 0; padding: 1px 6px;
+                 border-radius: 4px; background: var(--bg-alt, #2a2a2a); font-size: 12px; }
+.dim { color: var(--text-dim); font-size: 12px; }
+
+/* ── insert menu (Keys tab) ───────────────────────────────────────────── */
+#menu {
+  position: fixed;
+  z-index: 20;
+  min-width: 260px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .55);
+}
+#menu .cat {
+  padding: 8px 12px 2px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--text-dim);
+}
+#menu .item {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+#menu .item:hover { background: var(--bg2); }
+#menu .item code { color: var(--text-dim); font-size: 11px; }
+#menu .filterwrap { padding: 4px 10px 6px; }
+#menu .filterwrap input { width: 100%; }
+#menu #appRows { max-height: 46vh; overflow-y: auto; }
+td.actions { width: 150px; }

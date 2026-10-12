@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; style-src 'self'; script-src 'self';">
+  <link rel="stylesheet" href="style.css">
+  <title>Sostenuto</title>
+</head>
+<body>
+
+<div id="tabs">
+  <button class="tab active" data-tab="modifiers" id="tabBtnModifiers"></button>
+  <button class="tab" data-tab="keys" id="tabBtnKeys"></button>
+  <button class="tab" data-tab="layers" id="tabBtnLayers"></button>
+</div>
+
+<div id="main">
+
+  <section id="tab-modifiers" class="tabpane active">
+    <div class="inner">
+      <h2 id="modH"></h2>
+      <p class="help" id="modHelp"></p>
+
+      <div class="modrow">
+        <label><span id="lblCaps"></span>
+          <select id="selCaps"></select></label>
+        <span class="hint" id="hintCaps"></span>
+      </div>
+      <p class="help" id="capsHelp"></p>
+
+      <div class="modrow">
+        <label><span id="lblCopilot"></span>
+          <select id="selCopilot"></select></label>
+        <span class="hint" id="hintCopilot"></span>
+      </div>
+      <p class="help" id="copilotHelp"></p>
+
+      <div class="modrow">
+        <label><input type="checkbox" id="chkCapsAltIsCtrl"> <span id="lblCapsAltIsCtrl"></span></label>
+      </div>
+      <p class="help" id="capsAltIsCtrlHelp"></p>
+
+      <p class="warn" id="warnWin"></p>
+      <p class="warn" id="warnMismatch"></p>
+      <p class="help" id="noneNote"></p>
+    </div>
+  </section>
+
+  <section id="tab-keys" class="tabpane">
+    <div class="inner">
+      <h2 id="keysH"></h2>
+      <p class="help" id="keysHelp"></p>
+
+      <!-- one section per layer, built by renderKeys: the three built in,
+           then every extra [key] section the ini has -->
+      <div id="layerSections"></div>
+
+      <h3 id="addLayerH"></h3>
+      <p class="help" id="addLayerHelp"></p>
+      <div class="modrow">
+        <label><span id="lblAddLayer"></span>
+          <select id="selNewLayer"></select></label>
+        <button id="btnAddLayer" class="small"></button>
+      </div>
+
+      <p>
+        <button id="btnSaveKeys" class="small primary"></button>
+        <span id="keysDirty" class="dirty"></span>
+      </p>
+    </div>
+  </section>
+
+  <section id="tab-layers" class="tabpane">
+    <div class="inner">
+      <h2 id="layersH"></h2>
+      <p class="help" id="layersHelp"></p>
+      <div id="layerList"></div>
+      <p><button id="btnOpenIni" class="small"></button></p>
+    </div>
+  </section>
+
+</div>
+
+<div id="menu" hidden></div>
+
+<div id="statusbar"><span id="status"></span></div>
+
+<script src="app.js"></script>
+</body>
+</html>

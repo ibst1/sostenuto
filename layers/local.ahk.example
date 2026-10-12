@@ -1,0 +1,22 @@
+#Requires AutoHotkey v2.0
+
+; =====================================================================
+;  Site-specific hotkeys and hotstrings. Copy this file to local.ahk (which
+;  git ignores) and fill in your own. Sostenuto includes it if it exists,
+;  after app-shortcuts.ahk, so WinHeld() and the call: targets of
+;  core\functions.local.ahk are available. The Layers tab lists it like any
+;  other layer file.
+;
+;  Every Win chord should require a PHYSICAL Win key - see the note in
+;  app-shortcuts.ahk for why.
+; =====================================================================
+
+#HotIf WinHeld()
+!#j::LaunchJournal()
+!#v::LaunchViewer()
+!#i::LaunchIntranet()
++#h::LaunchHelper()
+#HotIf
+
+; A hotstring that types a long path
+:?*:projdir::SendText(OneDrive("Projects\Current"))
