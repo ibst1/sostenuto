@@ -6,3 +6,7 @@ stuck-modifiers.log
 Sostenuto.ini
 core/functions.local.ahk
 layers/local.ahk
+
+# build output (build.ps1)
+build/
+dist/
